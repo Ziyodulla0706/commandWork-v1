@@ -1,7 +1,7 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 admin_panel = ReplyKeyboardMarkup(
-    keyboard=[
+    keyboard=[  
         [
             KeyboardButton(text="Управление пользователями"),
             KeyboardButton(text="Управление контентом")
@@ -14,7 +14,5 @@ admin_panel = ReplyKeyboardMarkup(
             KeyboardButton(text="Выйти из админ панели")
         ]
     ],
-
     resize_keyboard=True
-)   
-
+)

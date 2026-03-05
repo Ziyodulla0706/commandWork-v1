@@ -45,7 +45,26 @@ async def view_settings(message: Message):
 async def handle_unknown_admin_command(message: Message):
     await message.answer("Неизвестная команда. Пожалуйста, выберите действие из админ панели.") 
 
-@router.message(F.text == "Выйти из админ панели")
-async def exit_admin_panel(message: Message):
-    await message.answer("Вы вышли из админ панели.", reply_markup=None)
+
+@router.message(F.text == "Users")
+async def show_users(message: Message, session):
+    users = await session.execute("SELECT telegram_id, full_name, role FROM users")
+    result = users.fetchall()
+    text = "Users:\n"
+    for user in result:
+        text += f"{user.full_name} | {user.role}\n"
+    await message.answer(text)
+    
+
+
+@router.message(F.text == "Content")
+async def show_content(message: Message, session):
+    content = await session.execute("SELECT id, title FROM content")
+    result = content.fetchall()
+    text = "Content:\n"
+    for item in result:
+        text += f"{item.id} | {item.title}\n"
+    await message.answer(text)
+
+
 
